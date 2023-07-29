@@ -20,7 +20,7 @@ mongoose.connect(DATABASE_URL)
 // временное решение авторизации пользователя
 app.use((req, res, next) => {
   req.user = {
-    _id: '1234567890',
+    _id: '64c556019c7f3a4a7dba23ab',
   };
 
   next();
