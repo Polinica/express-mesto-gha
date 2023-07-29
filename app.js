@@ -8,7 +8,7 @@ const DATABASE_URL = 'mongodb://localhost:27017/mestodb';
 const app = express();
 
 // подключаемся к серверу mongo
-mongoose.connect('mongodb://localhost:27017/mestodb')
+mongoose.connect(DATABASE_URL)
   .then(() => {
     console.log(`Connected to database on ${DATABASE_URL}`);
   })
