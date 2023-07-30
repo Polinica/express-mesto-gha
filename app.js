@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { routes } = require('./routes');
 
 const { PORT = 3000 } = process.env;
-const DATABASE_URL = 'mongodb://localhost:27017/mestodb';
+const DATABASE_URL = 'mongodb://127.0.0.1:27017/mestodb';
 
 const app = express();
 
