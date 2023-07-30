@@ -10,22 +10,9 @@
 
 Остальные директории вспомогательные, создаются при необходимости разработчиком
 
-## Запуск проекта
-
-`npm run start` — запускает сервер  
-`npm run dev` — запускает сервер с hot-reload
-
 ## Ссылка на репозиторий
 
 https://github.com/Polinica/express-mesto-gha
-
-### Создайте тестового пользователя
-
-{
-"name": "Тестовый пользователь",
-"about": "Информация о себе",
-"avatar": "https://www.biography.com/.image/t_share/MTE4MDAzNDEwODQwOTQ2MTkw/ada-lovelace-20825279-1-402.jpg"
-}
 
 ### Чеклист
 
