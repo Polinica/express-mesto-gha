@@ -17,3 +17,7 @@ https://github.com/Polinica/express-mesto-gha
 ### Чеклист
 
 https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist_13.pdf
+
+👤 Автор
+
+Виктория Люсикова
