@@ -19,9 +19,9 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
   },
-  // {
-  //   versionKey: false,
-  // },
+  {
+    versionKey: false,
+  },
 );
 
 const User = mongoose.model('user', userSchema);
