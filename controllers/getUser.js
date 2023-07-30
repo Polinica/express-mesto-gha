@@ -1,21 +1,29 @@
-const { User } = require('../models/user');
-const { handleError } = require('../utils/handleError');
+const {
+  User,
+} = require('../models/user')
+const {
+  handleError,
+} = require('../utils/handleError')
 
 async function getUser(req, res) {
   try {
-    const { userId } = req.params;
-    const user = await User.findById(userId);
+    const {
+      userId,
+    } = req.params
+    const user = await User.findById(userId)
 
     if (!user) {
-      const error = new Error('Пользователь не найден');
-      error.name = 'NotFoundError';
-      throw error;
+      const error = new Error('Пользователь не найден')
+      error.name = 'NotFoundError'
+      throw error
     }
 
-    res.send(user);
+    res.send(user)
   } catch (err) {
-    handleError(err, req, res);
+    handleError(err, req, res)
   }
 }
 
-module.exports = { getUser };
+module.exports = {
+  getUser,
+}
