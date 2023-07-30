@@ -1,15 +1,9 @@
 {
   "extends": "airbnb-base",
   "env": {
-<<<<<<< HEAD
-    "browser": true,
-    "commonjs": true,
-    "es2021": true
-=======
     "browser": true
     // "commonjs": true,
     // "es2021": true
->>>>>>> 870b963475af812cc63208462f354fd33feb46ce
   },
   "parserOptions": {
     "ecmaVersion": "latest"
