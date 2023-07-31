@@ -5,6 +5,7 @@ const {
   handleError,
 } = require('../utils/handleError')
 
+// POST /cards — создаёт карточку
 async function createCard(req, res) {
   try {
     const {

@@ -1,13 +1,16 @@
 const express = require('express')
+
+const {
+  createCard,
+} = require('../controllers/cards')
+
 const {
   getAllCards,
 } = require('../controllers/getAllCards')
 const {
   deleteCard,
 } = require('../controllers/deleteCard')
-const {
-  createCard,
-} = require('../controllers/createCard')
+
 const {
   putLike,
 } = require('../controllers/putLike')
