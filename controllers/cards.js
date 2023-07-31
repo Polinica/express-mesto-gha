@@ -106,7 +106,6 @@ async function deleteLike(req, res) {
   }
 }
 
-
 module.exports = {
-  createCard,getAllCards, deleteCard, putLike, deleteLike,
+  createCard, getAllCards, deleteCard, putLike, deleteLike,
 }

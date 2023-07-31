@@ -33,8 +33,8 @@ app.use((req, res, next) => {
 })
 
 // подключаем роуты и всё остальное...
-app.use(express.json());
-app.use(routes);
+app.use(express.json())
+app.use(routes)
 
 app.listen(PORT, () => {
   console.log(`is running on port ${PORT}`)

@@ -1,5 +1,6 @@
+// import validator from 'validator'
+
 const mongoose = require('mongoose')
-import validator from 'validator';
 
 const userSchema = new mongoose.Schema(
   {
@@ -17,10 +18,6 @@ const userSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      validate: {
-        validator: (v) => validator.isURL(v),
-        message: 'Некорректный URL',
-      },
       required: true,
     },
   },
@@ -37,3 +34,6 @@ const User = mongoose.model('user', userSchema)
 module.exports = {
   User,
 }
+
+// создаём модель и экспортируем её
+// module.exports = mongoose.model('user', userSchema);

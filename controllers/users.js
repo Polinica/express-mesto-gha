@@ -5,7 +5,6 @@
    PATCH /users/me/avatar — обновляет аватар профиля
 */
 
-
 const {
   User,
 } = require('../models/user')
