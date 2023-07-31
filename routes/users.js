@@ -1,19 +1,7 @@
 const express = require('express')
 const {
-  getAllUsers,
-} = require('../controllers/getAllUsers')
-const {
-  getUser,
-} = require('../controllers/getUser')
-const {
-  createUser,
-} = require('../controllers/createUser')
-const {
-  updateUser,
-} = require('../controllers/updateUser')
-const {
-  updateAvatar,
-} = require('../controllers/updateAvatar')
+  getAllUsers, getUser, createUser, updateUser, updateAvatar,
+} = require('../controllers/users')
 
 const users = express.Router()
 

@@ -1,22 +1,8 @@
 const express = require('express')
 
 const {
-  createCard,
+  createCard,getAllCards, deleteCard, putLike, deleteLike,
 } = require('../controllers/cards')
-
-const {
-  getAllCards,
-} = require('../controllers/getAllCards')
-const {
-  deleteCard,
-} = require('../controllers/deleteCard')
-
-const {
-  putLike,
-} = require('../controllers/putLike')
-const {
-  deleteLike,
-} = require('../controllers/deleteLike')
 
 const cards = express.Router()
 
