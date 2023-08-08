@@ -24,13 +24,13 @@ mongoose.connect(DATABASE_URL)
   })
 
 // временное решение авторизации пользователя
-app.use((req, res, next) => {
-  req.user = {
-    _id: '64c556019c7f3a4a7dba23ab',
-  }
+// app.use((req, res, next) => {
+//   req.user = {
+//     _id: '64c556019c7f3a4a7dba23ab',
+//   }
 
-  next()
-})
+//   next()
+// })
 
 // подключаем роуты и всё остальное...
 app.use(express.json())

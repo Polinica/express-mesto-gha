@@ -77,6 +77,25 @@ async function getUser(req, res) {
   }
 }
 
+// GET /users/me - возвращает информацию о текущем пользователе
+
+async function getCurrentUser(req, res) {
+  try {
+    const userId = req.user._id
+    const user = await User.findById(userId)
+
+    if (!user) {
+      const error = new Error('Пользователь не найден')
+      error.name = 'NotFoundError'
+      throw error
+    }
+
+    res.send(user)
+  } catch (err) {
+    handleError(err, req, res)
+  }
+}
+
 // GET /users — возвращает всех пользователей
 async function getAllUsers(req, res) {
   try {
@@ -151,5 +170,5 @@ async function updateAvatar(req, res) {
 }
 
 module.exports = {
-  getAllUsers, getUser, createUser, updateUser, updateAvatar, login,
+  getAllUsers, getUser, createUser, updateUser, updateAvatar, login, getCurrentUser,
 }
