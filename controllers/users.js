@@ -5,6 +5,8 @@
    PATCH /users/me/avatar — обновляет аватар профиля
 */
 
+const bcrypt = require('bcryptjs')
+
 const {
   User,
 } = require('../models/user')
@@ -43,14 +45,17 @@ async function getAllUsers(req, res) {
   }
 }
 
+const SALT_LENGTH = 10
+
 // POST /users — создаёт пользователя
 async function createUser(req, res) {
   try {
     const {
       email, password, name, about, avatar,
     } = req.body
+    const passwordHash = await bcrypt.hash(password, SALT_LENGTH)
     const user = await User.create({
-      email, password, name, about, avatar,
+      email, password: passwordHash, name, about, avatar,
     })
     res.send(user)
   } catch (err) {
