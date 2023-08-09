@@ -19,8 +19,8 @@
     "object-curly-newline": ["error", "always"],
     "import/no-extraneous-dependencies": [
       "error",
-      {"devDependencies": ["**/*.test.ts", "**/*.test.tsx"]}
-      // {"devDependencies": true}
+      // {"devDependencies": ["**/*.test.ts", "**/*.test.tsx"]}
+       {"devDependencies": true}
     ],
     "no-underscore-dangle": ["error", {"allow": ["_id"]}]
   }
