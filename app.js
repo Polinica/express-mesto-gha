@@ -1,14 +1,14 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const {
- errors
+  errors,
 } = require('celebrate')
 const helmet = require('helmet')
 const {
   routes,
 } = require('./routes')
 const {
- handleError
+  handleError,
 } = require('./middlewares/handleError')
 
 const {
