@@ -1,7 +1,7 @@
 const express = require('express')
 
 const {
- celebrate, Joi
+  celebrate, Joi,
 } = require('celebrate')
 
 // const {
@@ -14,15 +14,15 @@ const {
   cards,
 } = require('./cards')
 const {
-auth
+  auth,
 } = require('../middlewares/auth')
 
 const {
- login, createUser
+  login, createUser,
 } = require('../controllers/users')
 
 const {
- NotFoundError
+  NotFoundError,
 } = require('../errors/NotFoundError')
 
 const routes = express.Router()

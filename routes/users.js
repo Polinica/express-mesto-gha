@@ -1,7 +1,7 @@
 const express = require('express')
- const {
-  celebrate, Joi
- } = require('celebrate')
+const {
+  celebrate, Joi,
+} = require('celebrate')
 const {
   getAllUsers, getUser, updateUser, updateAvatar, getCurrentUser,
 } = require('../controllers/users')

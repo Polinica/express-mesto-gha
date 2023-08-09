@@ -4,14 +4,14 @@ const {
 } = require('../models/card')
 
 const {
- NotFoundError
+  NotFoundError,
 } = require('../errors/NotFoundError')
 // const {
 //  UnauthorizedError
 // } = require('../errors/UnauthorizedError')
 
 const {
- ForbiddenError
+  ForbiddenError,
 } = require('../errors/ForbiddenError')
 
 // GET /cards — возвращает все карточки

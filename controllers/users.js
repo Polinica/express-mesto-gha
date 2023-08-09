@@ -13,15 +13,15 @@ const {
 } = require('../models/user')
 
 const {
- UnauthorizedError
+  UnauthorizedError,
 } = require('../errors/UnauthorizedError')
 
 const {
- NotFoundError
+  NotFoundError,
 } = require('../errors/NotFoundError')
 
 const {
-ConflictError
+  ConflictError,
 } = require('../errors/ConflictError')
 
 // login (/POST) авторизация(залогиниывание) пользователя по email и password
@@ -29,12 +29,12 @@ ConflictError
 async function login(req, res, next) {
   try {
     const {
- email, password
-} = req.body
+      email, password,
+    } = req.body
 
     const user = await User.findOne({
- email
-}).select('+password')
+      email,
+    }).select('+password')
 
     if (!user) {
       throw new UnauthorizedError('Неверные данные для входа')
@@ -55,8 +55,8 @@ async function login(req, res, next) {
       },
     )
     res.send({
- jwt: token
-})
+      jwt: token,
+    })
   } catch (err) {
     next(err)
   }
@@ -118,13 +118,12 @@ async function createUser(req, res, next) {
     } = req.body
     const passwordHash = await bcrypt.hash(password, SALT_LENGTH)
     let user = await User.findOne({
-    email
+      email,
     })
 
     if (user) {
       throw new ConflictError('Пользователь с таким email уже существует')
     }
-
 
     user = await User.create({
       email, password: passwordHash, name, about, avatar,

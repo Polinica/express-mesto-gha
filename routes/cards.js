@@ -1,7 +1,7 @@
 const express = require('express')
 
 const {
- celebrate, Joi
+  celebrate, Joi,
 } = require('celebrate')
 
 const {
