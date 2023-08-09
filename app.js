@@ -1,5 +1,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const {
+ errors
+} = require('celebrate')
 const helmet = require('helmet')
 const {
   routes,
@@ -38,6 +41,9 @@ mongoose.connect(DATABASE_URL)
 // подключаем роуты и всё остальное...
 app.use(express.json())
 app.use(routes)
+
+app.use(errors()) // обработчик ошибок celebrate
+
 app.use(handleError)
 
 app.listen(PORT, () => {
