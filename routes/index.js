@@ -1,7 +1,7 @@
 const express = require('express')
-const {
-  handleError,
-} = require('../utils/handleError')
+// const {
+//   handleError,
+// } = require('../utils/handleError')
 const {
   users,
 } = require('./users')
@@ -16,6 +16,10 @@ const {
  login, createUser
 } = require('../controllers/users')
 
+const {
+ NotFoundError
+} = require('../errors/NotFoundError')
+
 const routes = express.Router()
 
 routes.post('/signup', express.json(), createUser)
@@ -26,10 +30,8 @@ routes.all('*', auth)
 routes.use('/users', users)
 routes.use('/cards', cards)
 
-routes.all('*', (req, res) => {
-  const err = new Error('Неверный адрес запроса')
-  err.name = 'NotFoundError'
-  handleError(err, req, res)
+routes.all('*', (req, res, next) => {
+  next(new NotFoundError('Неверный адрес запроса'))
 })
 
 module.exports = {

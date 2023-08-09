@@ -15,9 +15,17 @@ const {
   handleError,
 } = require('../utils/handleError')
 
+const {
+ UnauthorizedError
+} = require('../errors/UnauthorizedError')
+
+const {
+ NotFoundError
+} = require('../errors/NotFoundError')
+
 // login (/POST) авторизация(залогиниывание) пользователя по email и password
 
-async function login(req, res) {
+async function login(req, res, next) {
   try {
     const {
  email, password
@@ -28,16 +36,12 @@ async function login(req, res) {
 }).select('+password')
 
     if (!user) {
-      const error = new Error('Неверные данные для входа')
-      error.name = 'UnauthorizedError'
-      throw error
+      throw new UnauthorizedError('Неверные данные для входа')
     }
     const hasRightPassword = await bcrypt.compare(password, user.password)
 
     if (!hasRightPassword) {
-      const error = new Error('Неверные данные для входа')
-      error.name = 'UnauthorizedError'
-      throw error
+      throw new UnauthorizedError('Неверные данные для входа')
     }
 
     const token = jwt.sign(
@@ -53,12 +57,12 @@ async function login(req, res) {
  jwt: token
 })
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
 // GET /users/:userId - возвращает пользователя по _id
-async function getUser(req, res) {
+async function getUser(req, res, next) {
   try {
     const {
       userId,
@@ -66,33 +70,29 @@ async function getUser(req, res) {
     const user = await User.findById(userId)
 
     if (!user) {
-      const error = new Error('Пользователь не найден')
-      error.name = 'NotFoundError'
-      throw error
+      throw new NotFoundError('Пользователь не найден')
     }
 
     res.send(user)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
 // GET /users/me - возвращает информацию о текущем пользователе
 
-async function getCurrentUser(req, res) {
+async function getCurrentUser(req, res, next) {
   try {
     const userId = req.user._id
     const user = await User.findById(userId)
 
     if (!user) {
-      const error = new Error('Пользователь не найден')
-      error.name = 'NotFoundError'
-      throw error
+      throw new NotFoundError('Пользователь не найден')
     }
 
     res.send(user)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
