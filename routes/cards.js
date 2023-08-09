@@ -8,7 +8,7 @@ const cards = express.Router()
 
 cards.get('/', getAllCards)
 cards.delete('/:cardId', deleteCard)
-cards.post('/', express.json(), createCard)
+cards.post('/', createCard)
 cards.put('/:cardId/likes', putLike)
 cards.delete('/:cardId/likes', deleteLike)
 
