@@ -11,9 +11,6 @@ const jwt = require('jsonwebtoken')
 const {
   User,
 } = require('../models/user')
-const {
-  handleError,
-} = require('../utils/handleError')
 
 const {
  UnauthorizedError
@@ -22,6 +19,10 @@ const {
 const {
  NotFoundError
 } = require('../errors/NotFoundError')
+
+const {
+ConflictError
+} = require('../errors/ConflictError')
 
 // login (/POST) авторизация(залогиниывание) пользователя по email и password
 
@@ -97,38 +98,47 @@ async function getCurrentUser(req, res, next) {
 }
 
 // GET /users — возвращает всех пользователей
-async function getAllUsers(req, res) {
+async function getAllUsers(req, res, next) {
   try {
     const users = await User.find({
     })
     res.send(users)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
 const SALT_LENGTH = 10
 
 // POST /users — создаёт пользователя
-async function createUser(req, res) {
+async function createUser(req, res, next) {
   try {
     const {
       email, password, name, about, avatar,
     } = req.body
     const passwordHash = await bcrypt.hash(password, SALT_LENGTH)
-    let user = await User.create({
+    let user = await User.findOne({
+    email
+    })
+
+    if (user) {
+      throw new ConflictError('Пользователь с таким email уже существует')
+    }
+
+
+    user = await User.create({
       email, password: passwordHash, name, about, avatar,
     })
     user = user.toObject()
     delete user.password
     res.send(user)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
 // PATCH /users/me — обновляет профиль
-async function updateUser(req, res) {
+async function updateUser(req, res, next) {
   try {
     const userId = req.user._id
     const {
@@ -145,12 +155,12 @@ async function updateUser(req, res) {
     )
     res.send(user)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
 // PATCH /users/me/avatar — обновляет аватар профиля
-async function updateAvatar(req, res) {
+async function updateAvatar(req, res, next) {
   try {
     const userId = req.user._id
     const {
@@ -167,7 +177,7 @@ async function updateAvatar(req, res) {
     )
     res.send(user)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 

@@ -2,29 +2,31 @@ const mongoose = require('mongoose')
 const {
   Card,
 } = require('../models/card')
-const {
-  handleError,
-} = require('../utils/handleError')
+
 const {
  NotFoundError
 } = require('../errors/NotFoundError')
+// const {
+//  UnauthorizedError
+// } = require('../errors/UnauthorizedError')
+
 const {
- UnauthorizedError
-} = require('../errors/UnauthorizedError')
+ ForbiddenError
+} = require('../errors/ForbiddenError')
 
 // GET /cards — возвращает все карточки
-async function getAllCards(req, res) {
+async function getAllCards(req, res, next) {
   try {
     const cards = await Card.find({
     })
     res.send(cards)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
 // POST /cards — создаёт карточку
-async function createCard(req, res) {
+async function createCard(req, res, next) {
   try {
     const {
       name, link,
@@ -35,7 +37,7 @@ async function createCard(req, res) {
     })
     res.send(card)
   } catch (err) {
-    handleError(err, req, res)
+    next(err)
   }
 }
 
@@ -60,7 +62,7 @@ async function deleteCard(req, res, next) {
     const userId = req.user._id
 
     if (ownerId !== userId) {
-      throw new UnauthorizedError('Удалить можно только свою карточку')
+      throw new ForbiddenError('Нельзя удалить чужую карточку')
     }
 
     await Card.findByIdAndRemove(cardId)

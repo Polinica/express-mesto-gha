@@ -11,8 +11,16 @@ const {
 const cards = express.Router()
 
 cards.get('/', getAllCards)
-cards.delete('/:cardId', deleteCard)
 
+cards.delete(
+  '/:cardId',
+  celebrate({
+    params: Joi.object().keys({
+      cardId: Joi.string().alphanum().length(24),
+    }),
+  }),
+  deleteCard,
+)
 
 cards.post(
   '/',
@@ -25,8 +33,25 @@ cards.post(
   createCard,
 )
 
-cards.put('/:cardId/likes', putLike)
-cards.delete('/:cardId/likes', deleteLike)
+cards.put(
+  '/:cardId/likes',
+  celebrate({
+    params: Joi.object().keys({
+      cardId: Joi.string().alphanum().length(24),
+    }),
+  }),
+  putLike,
+)
+
+cards.delete(
+  '/:cardId/likes',
+  celebrate({
+    params: Joi.object().keys({
+      cardId: Joi.string().alphanum().length(24),
+    }),
+  }),
+  deleteLike,
+)
 
 module.exports = {
   cards,
