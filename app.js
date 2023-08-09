@@ -4,6 +4,9 @@ const helmet = require('helmet')
 const {
   routes,
 } = require('./routes')
+const {
+ handleError
+} = require('./middlewares/handleError')
 
 const {
   PORT = 3000, DATABASE_URL = 'mongodb://127.0.0.1:27017/mestodb',
@@ -35,6 +38,7 @@ mongoose.connect(DATABASE_URL)
 // подключаем роуты и всё остальное...
 app.use(express.json())
 app.use(routes)
+app.use(handleError)
 
 app.listen(PORT, () => {
   console.log(`is running on port ${PORT}`)
