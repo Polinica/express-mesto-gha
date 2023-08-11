@@ -29,15 +29,6 @@ mongoose.connect(DATABASE_URL)
     console.error(err)
   })
 
-// временное решение авторизации пользователя
-// app.use((req, res, next) => {
-//   req.user = {
-//     _id: '64c556019c7f3a4a7dba23ab',
-//   }
-
-//   next()
-// })
-
 // подключаем роуты и всё остальное...
 app.use(express.json())
 app.use(routes)

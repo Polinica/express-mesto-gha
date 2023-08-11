@@ -35,7 +35,7 @@ async function createCard(req, res, next) {
     const card = await Card.create({
       name, link, owner: ownerId,
     })
-    res.send(card)
+    res.status(201).send(card)
   } catch (err) {
     next(err)
   }
@@ -65,7 +65,7 @@ async function deleteCard(req, res, next) {
       throw new ForbiddenError('Нельзя удалить чужую карточку')
     }
 
-    await Card.findByIdAndRemove(cardId)
+    await Card.deleteOne(card)
 
     res.send(card)
   } catch (err) {
