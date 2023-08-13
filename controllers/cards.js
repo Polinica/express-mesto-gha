@@ -1,4 +1,3 @@
-const mongoose = require('mongoose')
 const {
   Card,
 } = require('../models/card')
@@ -48,11 +47,7 @@ async function deleteCard(req, res, next) {
       cardId,
     } = req.params
 
-    let card = mongoose.Types.ObjectId.isValid(cardId)
-
-    if (card) {
-      card = await Card.findById(cardId).populate('owner')
-    }
+    const card = await Card.findById(cardId).populate('owner')
 
     if (!card) {
       throw new NotFoundError('Карточка не найдена')
